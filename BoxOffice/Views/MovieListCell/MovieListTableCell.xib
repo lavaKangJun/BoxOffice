@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="MovieListTableCell" rowHeight="132" id="WVF-RS-OQI" customClass="MovieListTableCell" customModule="BoxOffice" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="481" height="132"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="WVF-RS-OQI" id="TER-17-iOZ">
+                <rect key="frame" x="0.0" y="0.0" width="481" height="131.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="0Vg-y6-F84">
+                        <rect key="frame" x="22" y="16" width="60" height="100"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="60" id="kfU-ke-MC4"/>
+                        </constraints>
+                    </imageView>
+                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="hR8-K8-9pd">
+                        <rect key="frame" x="90" y="32" width="370" height="68"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="7tb-ym-Fag">
+                                <rect key="frame" x="0.0" y="0.0" width="83.5" height="20"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="영화제목" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vp6-8U-c4x">
+                                        <rect key="frame" x="0.0" y="0.0" width="55.5" height="20"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_12" translatesAutoresizingMaskIntoConstraints="NO" id="mUI-3o-6nC">
+                                        <rect key="frame" x="63.5" y="0.0" width="20" height="20"/>
+                                    </imageView>
+                                </subviews>
+                            </stackView>
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="4c3-rE-5Bc">
+                                <rect key="frame" x="0.0" y="28" width="180" height="16"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="평점 :" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="a74-2k-ZtY">
+                                        <rect key="frame" x="0.0" y="0.0" width="30" height="16"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="eRn-o0-Ljn">
+                                        <rect key="frame" x="34" y="0.0" width="19" height="16"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="예매순위 :" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="T2q-Yd-vzw">
+                                        <rect key="frame" x="57" y="0.0" width="52.5" height="16"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="ChA-d1-M8i">
+                                        <rect key="frame" x="113.5" y="0.0" width="8.5" height="16"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="예매율 :" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="qvU-XK-asq">
+                                        <rect key="frame" x="126" y="0.0" width="41.5" height="16"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="JNH-2v-fBA">
+                                        <rect key="frame" x="171.5" y="0.0" width="8.5" height="16"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
+                            <stackView opaque="NO" contentMode="scaleToFill" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="4IB-3z-uvO">
+                                <rect key="frame" x="0.0" y="52" width="126.5" height="16"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="개봉일 :" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KgF-uR-8fb">
+                                        <rect key="frame" x="0.0" y="0.0" width="41.5" height="16"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2000-00-00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a9a-aK-A9c">
+                                        <rect key="frame" x="49.5" y="0.0" width="77" height="16"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                    </stackView>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="0Vg-y6-F84" firstAttribute="leading" secondItem="TER-17-iOZ" secondAttribute="leadingMargin" constant="2" id="2Rx-D5-DsH"/>
+                    <constraint firstItem="0Vg-y6-F84" firstAttribute="top" secondItem="TER-17-iOZ" secondAttribute="topMargin" constant="5" id="9gm-U0-MKc"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="0Vg-y6-F84" secondAttribute="bottom" constant="5" id="B3T-0M-RJy"/>
+                    <constraint firstItem="hR8-K8-9pd" firstAttribute="leading" secondItem="0Vg-y6-F84" secondAttribute="trailing" constant="8" id="OTY-Ht-3qm"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="hR8-K8-9pd" secondAttribute="trailing" constant="1" id="PvT-cr-YXO"/>
+                    <constraint firstItem="hR8-K8-9pd" firstAttribute="centerY" secondItem="TER-17-iOZ" secondAttribute="centerY" id="fJt-xu-Jxh"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="gradeImageView" destination="mUI-3o-6nC" id="hHG-pM-WOi"/>
+                <outlet property="movieNameLabel" destination="Vp6-8U-c4x" id="TQb-Tv-3Dc"/>
+                <outlet property="moviePosterImageView" destination="0Vg-y6-F84" id="p3u-Vt-gL4"/>
+                <outlet property="openDayLabel" destination="a9a-aK-A9c" id="GDs-RY-nN9"/>
+                <outlet property="reservationRatingGradeLabel" destination="ChA-d1-M8i" id="eN7-tI-ssX"/>
+                <outlet property="reservationRatingLabel" destination="JNH-2v-fBA" id="k8g-4G-w3i"/>
+                <outlet property="userRatingLabel" destination="eRn-o0-Ljn" id="jWZ-S9-wzg"/>
+            </connections>
+            <point key="canvasLocation" x="261.60000000000002" y="-205.99700149925039"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="ic_12" width="20" height="20"/>
+    </resources>
+</document>

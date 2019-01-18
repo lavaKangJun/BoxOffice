@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="movieCommentGoWriteReviewTableCell" rowHeight="46" id="zKn-1g-nf3" customClass="MovieCommentGoWriteReviewTableCell" customModule="BoxOffice" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="424" height="46"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="zKn-1g-nf3" id="Mrr-Px-0TC">
+                <rect key="frame" x="0.0" y="0.0" width="424" height="45.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="한줄평" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tOf-ce-mNQ">
+                        <rect key="frame" x="25" y="12.5" width="45" height="21"/>
+                        <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nWQ-CB-ySh">
+                        <rect key="frame" x="396" y="11.5" width="23" height="23"/>
+                        <state key="normal" image="btn_compose"/>
+                    </button>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="tOf-ce-mNQ" firstAttribute="leading" secondItem="Mrr-Px-0TC" secondAttribute="leadingMargin" constant="5" id="Feu-1X-oCj"/>
+                    <constraint firstAttribute="trailing" secondItem="nWQ-CB-ySh" secondAttribute="trailing" constant="5" id="YZR-B7-DEU"/>
+                    <constraint firstItem="tOf-ce-mNQ" firstAttribute="centerY" secondItem="Mrr-Px-0TC" secondAttribute="centerY" id="hrb-hv-NA6"/>
+                    <constraint firstItem="nWQ-CB-ySh" firstAttribute="centerY" secondItem="Mrr-Px-0TC" secondAttribute="centerY" id="hxt-lz-T1n"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="goWriteButton" destination="nWQ-CB-ySh" id="QQE-Iy-J0k"/>
+            </connections>
+            <point key="canvasLocation" x="80" y="-168.21589205397302"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="btn_compose" width="23" height="23"/>
+    </resources>
+</document>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="movieStoryTableCell" rowHeight="189" id="Xc2-qu-omE" customClass="MovieStoryTableCell" customModule="BoxOffice" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="468" height="189"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Xc2-qu-omE" id="Z3M-Pa-O2R">
+                <rect key="frame" x="0.0" y="0.0" width="468" height="188.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="줄거리" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XLa-1v-Vm6">
+                        <rect key="frame" x="23" y="14" width="44.5" height="20.5"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="20.5" id="ShY-Wo-Ylm"/>
+                            <constraint firstAttribute="width" constant="44.5" id="YaW-UD-aQq"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" bouncesZoom="NO" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="zAM-rJ-OdU">
+                        <rect key="frame" x="23" y="37.5" width="422" height="137.5"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                    </textView>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailingMargin" secondItem="zAM-rJ-OdU" secondAttribute="trailing" constant="3" id="ToH-Rf-toF"/>
+                    <constraint firstItem="zAM-rJ-OdU" firstAttribute="leading" secondItem="Z3M-Pa-O2R" secondAttribute="leadingMargin" constant="3" id="YpS-2d-DzR"/>
+                    <constraint firstItem="zAM-rJ-OdU" firstAttribute="top" secondItem="XLa-1v-Vm6" secondAttribute="bottom" constant="3" id="iMf-Vy-Axe"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="zAM-rJ-OdU" secondAttribute="bottom" constant="3" id="m4j-Fd-SRu"/>
+                    <constraint firstItem="XLa-1v-Vm6" firstAttribute="top" secondItem="Z3M-Pa-O2R" secondAttribute="topMargin" constant="3" id="nXS-uM-GHf"/>
+                    <constraint firstItem="XLa-1v-Vm6" firstAttribute="leading" secondItem="Z3M-Pa-O2R" secondAttribute="leadingMargin" constant="3" id="xGA-Hm-4Iq"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="movieStoryTextView" destination="zAM-rJ-OdU" id="hPS-Tn-eRy"/>
+            </connections>
+            <point key="canvasLocation" x="148.80000000000001" y="-23.838080959520241"/>
+        </tableViewCell>
+    </objects>
+</document>
