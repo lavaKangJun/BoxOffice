@@ -12,7 +12,7 @@ class MovieListCollectionViewController: UICollectionViewController, UICollectio
 
     //MARK:- Property
     private let collectionViewCellId = "MovieListCollectionCell"
-    private let movieListURL = "http://connect-boxoffice.run.goorm.io/movies?order_type="
+    private let movieListURL = baseURL + "movies?order_type="
     private let activityIndicatorView = UIActivityIndicatorView(style: .whiteLarge)
     private var collectionViewRefreshControl = UIRefreshControl()
     

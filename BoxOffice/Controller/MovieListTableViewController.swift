@@ -11,7 +11,7 @@ import UIKit
 class MovieListTableViewController: UITableViewController {
     
     private let tableViewCellId = "MovieListTableCell"
-    private let movieListURL = "http://connect-boxoffice.run.goorm.io/movies?order_type="
+    private let movieListURL = baseURL + "movies?order_type="
     private let activityIndicatorView = UIActivityIndicatorView(style: .whiteLarge)
     private var tableviewRefreshControl = UIRefreshControl()
     var movieList: [MovieList] = []  {
