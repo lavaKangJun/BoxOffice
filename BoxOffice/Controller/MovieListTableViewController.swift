@@ -11,7 +11,7 @@ import UIKit
 class MovieListTableViewController: UITableViewController {
     
     private let tableViewCellId = "MovieListTableCell"
-    private let movieListURL = "http://connect-boxoffice.run.goorm.io/movies?order_type="
+    private let movieListURL = baseURL + "movies?order_type="
     private let activityIndicatorView = UIActivityIndicatorView(style: .whiteLarge)
     private var tableviewRefreshControl = UIRefreshControl()
     var movieList: [MovieList] = []  {
@@ -37,16 +37,16 @@ class MovieListTableViewController: UITableViewController {
                     self.movieList = movieListResult.movies
                 } else {
                     DispatchQueue.main.async {
-                        showAlert(viewcontroller: self, title: "문제발생", message: "데이터를 가져올 수 없습니다.")
+                        self.showAlert(title: "문제발생", message: "데이터를 가져올 수 없습니다.")
                     }
                 }
                 DispatchQueue.main.async {
-                     self.activityIndicatorView.stopAnimating()
+                    self.activityIndicatorView.stopAnimating()
                 }
             } else {
                 DispatchQueue.main.async {
-                     self.activityIndicatorView.stopAnimating()
-                    showAlert(viewcontroller: self, title: "문제발생", message: "데이터를 가져올 수 없습니다.")
+                    self.activityIndicatorView.stopAnimating()
+                    self.showAlert(title: "문제발생", message: "데이터를 가져올 수 없습니다.")
                 }
             }
         }
@@ -75,7 +75,7 @@ class MovieListTableViewController: UITableViewController {
                     self.movieList = movieListResult.movies
                 } else {
                     DispatchQueue.main.async {
-                        showAlert(viewcontroller: self, title: "문제발생", message: "데이터를 가져올 수 없습니다.")
+                        self.showAlert(title: "문제발생", message: "데이터를 가져올 수 없습니다.")
                     }
                 }
                 DispatchQueue.main.async {
@@ -84,7 +84,7 @@ class MovieListTableViewController: UITableViewController {
             } else {
                 DispatchQueue.main.async {
                      self.tableviewRefreshControl.endRefreshing()
-                     showAlert(viewcontroller: self, title: "문제발생", message: "데이터를 가져올 수 없습니다.")
+                     self.showAlert(title: "문제발생", message: "데이터를 가져올 수 없습니다.")
                 }
             }
         }

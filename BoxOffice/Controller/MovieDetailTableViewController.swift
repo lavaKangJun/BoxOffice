@@ -12,8 +12,8 @@ class MovieDetailTableViewController: UITableViewController, UITextViewDelegate 
 
     private let cache: NSCache = NSCache<NSString, UIImage>()
     private let activityIndicatorView = UIActivityIndicatorView(style: .whiteLarge)
-    private let movieDetailURL = "http://connect-boxoffice.run.goorm.io/movie?id="
-    private let movieCommentURL = "http://connect-boxoffice.run.goorm.io/comments?movie_id="
+    private let movieDetailURL = baseURL + "movie?id="
+    private let movieCommentURL = baseURL + "comments?movie_id="
     var movieId: String?
     var movietitle: String?
     var movieDetail: MovieDetailResult? {
@@ -38,10 +38,12 @@ class MovieDetailTableViewController: UITableViewController, UITextViewDelegate 
         }
         return headerView
     }()
-    var movieDerectorActorCellId = "movieDirectorActorTableCell"
-    var movieStoryCellId = "movieStoryTableCell"
-    var movieCommentWithButtonCellId = "movieCommentGoWriteReviewTableCell"
-    var movieCommentCellId = "movieCommentOfUserTableCell"
+    enum movieCellId: String {
+        case derectorActor = "movieDirectorActorTableCell"
+        case story = "movieStoryTableCell"
+        case commentWithButton = "movieCommentGoWriteReviewTableCell"
+        case comment = "movieCommentOfUserTableCell"
+    }
     var bigImage: UIImage?
     
     override func viewDidLoad() {
@@ -76,13 +78,13 @@ class MovieDetailTableViewController: UITableViewController, UITextViewDelegate 
                 } else {
                     DispatchQueue.main.async {
                         self.activityIndicatorView.stopAnimating()
-                        showErrorAlert(viewcontroller: self)
+                        self.showErrorAlert()
                     }
                 }
             } else {
                 DispatchQueue.main.async {
                     self.activityIndicatorView.stopAnimating()
-                    showErrorAlert(viewcontroller: self)
+                    self.showErrorAlert()
                 }
             }
         }
@@ -96,12 +98,12 @@ class MovieDetailTableViewController: UITableViewController, UITextViewDelegate 
                     self.movieReviewList = movieReviewList.comments
                 } else {
                     DispatchQueue.main.async {
-                        showErrorAlert(viewcontroller: self)
+                        self.showErrorAlert()
                     }
                 }
             } else{
                 DispatchQueue.main.async {
-                    showErrorAlert(viewcontroller: self)
+                    self.showErrorAlert()
                 }
             }
         }
@@ -134,25 +136,25 @@ class MovieDetailTableViewController: UITableViewController, UITextViewDelegate 
         }
         
         if indexPath.section == 0 {
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: movieStoryCellId, for: indexPath) as? MovieStoryTableCell else {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: movieCellId.story.rawValue, for: indexPath) as? MovieStoryTableCell else {
             return UITableViewCell()
             }
             cell.movieStoryTextView.text = movieDetail.synopsis
             return cell
         } else if indexPath.section == 1 {
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: movieDerectorActorCellId, for: indexPath) as? MovieDirectorActorTableCell else {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: movieCellId.derectorActor.rawValue, for: indexPath) as? MovieDirectorActorTableCell else {
                 return UITableViewCell()
             }
             cell.directorLabel.text = movieDetail.director
             cell.actorLabel.text = movieDetail.actor
             return cell
         } else if indexPath.section == 2{
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: movieCommentWithButtonCellId, for: indexPath) as? MovieCommentGoWriteReviewTableCell else {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: movieCellId.commentWithButton.rawValue, for: indexPath) as? MovieCommentGoWriteReviewTableCell else {
                 return UITableViewCell()
             }
             return cell
         } else {
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: movieCommentCellId, for: indexPath) as? MovieCommentOfUserTableCell else {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: movieCellId.comment.rawValue, for: indexPath) as? MovieCommentOfUserTableCell else {
                 return UITableViewCell()
             }
             let movieReviewList = self.movieReviewList[indexPath.row]
@@ -163,10 +165,10 @@ class MovieDetailTableViewController: UITableViewController, UITextViewDelegate 
     
     //MARK:- setup TableView
     func setupTableview() {
-        self.tableView.register(UINib(nibName: "MovieStoryTableCell", bundle: nil), forCellReuseIdentifier: movieStoryCellId)
-         self.tableView.register(UINib(nibName: "MovieDirectorActorTableCell", bundle: nil), forCellReuseIdentifier: movieDerectorActorCellId)
-         self.tableView.register(UINib(nibName: "MovieCommentGoWriteReviewTableCell" , bundle: nil), forCellReuseIdentifier: movieCommentWithButtonCellId)
-        self.tableView.register(UINib(nibName: "MovieCommentOfUserTableCell", bundle: nil), forCellReuseIdentifier: movieCommentCellId)
+        self.tableView.register(UINib(nibName: "MovieStoryTableCell", bundle: nil), forCellReuseIdentifier: movieCellId.story.rawValue)
+         self.tableView.register(UINib(nibName: "MovieDirectorActorTableCell", bundle: nil), forCellReuseIdentifier: movieCellId.derectorActor.rawValue)
+         self.tableView.register(UINib(nibName: "MovieCommentGoWriteReviewTableCell" , bundle: nil), forCellReuseIdentifier: movieCellId.commentWithButton.rawValue)
+        self.tableView.register(UINib(nibName: "MovieCommentOfUserTableCell", bundle: nil), forCellReuseIdentifier: movieCellId.comment.rawValue)
     }
     
     
@@ -252,7 +254,7 @@ class MovieDetailTableViewController: UITableViewController, UITextViewDelegate 
                 } catch (let error) {
                     print(error.localizedDescription)
                     DispatchQueue.main.async {
-                        showAlert(viewcontroller: self, title: "문제발생", message: "이미지를 가져올 수 없습니다.")
+                        self.showAlert(title: "문제발생", message: "이미지를 가져올 수 없습니다.")
                     }
                 }
             }

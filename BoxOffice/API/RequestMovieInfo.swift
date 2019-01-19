@@ -8,6 +8,8 @@
 
 import Foundation
 
+let baseURL = "http://connect-boxoffice.run.goorm.io/"
+
 func movieInfoRequest<T: Decodable>(urlString: String, value: String ,completion: @escaping (Bool, Error?, T?) -> ()) {
     guard let url: URL = URL(string: urlString + value) else {
         return

@@ -12,7 +12,7 @@ class MovieListCollectionViewController: UICollectionViewController, UICollectio
 
     //MARK:- Property
     private let collectionViewCellId = "MovieListCollectionCell"
-    private let movieListURL = "http://connect-boxoffice.run.goorm.io/movies?order_type="
+    private let movieListURL = baseURL + "movies?order_type="
     private let activityIndicatorView = UIActivityIndicatorView(style: .whiteLarge)
     private var collectionViewRefreshControl = UIRefreshControl()
     
@@ -53,7 +53,7 @@ class MovieListCollectionViewController: UICollectionViewController, UICollectio
                     self.movieList = movieListResult.movies
                 } else {
                     DispatchQueue.main.async {
-                        showAlert(viewcontroller: self, title: "문제발생", message: "데이터를 가져올 수 없습니다.")
+                        self.showAlert(title: "문제발생", message: "데이터를 가져올 수 없습니다.")
                     }
                 }
                 DispatchQueue.main.async {
@@ -62,7 +62,7 @@ class MovieListCollectionViewController: UICollectionViewController, UICollectio
             } else {
                 DispatchQueue.main.async {
                     self.activityIndicatorView.stopAnimating()
-                    showAlert(viewcontroller: self, title: "문제발생", message: "데이터를 가져올 수 없습니다.")
+                    self.showAlert(title: "문제발생", message: "데이터를 가져올 수 없습니다.")
                 }
             }
         }
@@ -104,7 +104,7 @@ class MovieListCollectionViewController: UICollectionViewController, UICollectio
                     self.movieList = movieListResult.movies
                 } else {
                     DispatchQueue.main.async {
-                        showAlert(viewcontroller: self, title: "문제발생", message: "데이터를 가져올 수 없습니다.")
+                        self.showAlert(title: "문제발생", message: "데이터를 가져올 수 없습니다.")
                     }
                 }
                 DispatchQueue.main.async {
@@ -113,7 +113,7 @@ class MovieListCollectionViewController: UICollectionViewController, UICollectio
             } else {
                 DispatchQueue.main.async {
                     self.collectionViewRefreshControl.endRefreshing()
-                    showAlert(viewcontroller: self, title: "문제발생", message: "데이터를 가져올 수 없습니다.")
+                    self.showAlert(title: "문제발생", message: "데이터를 가져올 수 없습니다.")
                 }
             }
         }
