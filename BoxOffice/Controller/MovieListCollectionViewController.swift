@@ -45,27 +45,7 @@ class MovieListCollectionViewController: UICollectionViewController, UICollectio
         collectionView.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
         
         setupCollectionView()
-        movieInfoRequest(urlString: movieListURL, value: orderNumber.rawValue) { [weak self](success, error, movieListResult: MovieListResult?) in
-            guard let self = self else { return }
-            
-            if success {
-                if let movieListResult = movieListResult {
-                    self.movieList = movieListResult.movies
-                } else {
-                    DispatchQueue.main.async {
-                        showAlert(viewcontroller: self, title: "문제발생", message: "데이터를 가져올 수 없습니다.")
-                    }
-                }
-                DispatchQueue.main.async {
-                    self.activityIndicatorView.stopAnimating()
-                }
-            } else {
-                DispatchQueue.main.async {
-                    self.activityIndicatorView.stopAnimating()
-                    showAlert(viewcontroller: self, title: "문제발생", message: "데이터를 가져올 수 없습니다.")
-                }
-            }
-        }
+        request()
         
         // iOS 10.0 이상 버전인 경우
         if #available(iOS 10.0, *) {
@@ -95,28 +75,25 @@ class MovieListCollectionViewController: UICollectionViewController, UICollectio
         })
     }
     
-    //MARKL:- Refresh
-    @objc func refreshMovieData() {
+    private func request(usingIndicator: Bool = true) {
         movieInfoRequest(urlString: movieListURL, value: orderNumber.rawValue) { [weak self](success, error, movieListResult: MovieListResult?) in
             guard let self = self else { return }
-            if success {
-                if let movieListResult = movieListResult {
-                    self.movieList = movieListResult.movies
-                } else {
-                    DispatchQueue.main.async {
-                        showAlert(viewcontroller: self, title: "문제발생", message: "데이터를 가져올 수 없습니다.")
-                    }
-                }
-                DispatchQueue.main.async {
-                    self.collectionViewRefreshControl.endRefreshing()
-                }
+            DispatchQueue.main.async {
+                (usingIndicator) ? self.activityIndicatorView.stopAnimating() : self.collectionViewRefreshControl.endRefreshing()
+            }
+            if success, let movieListResult = movieListResult {
+                self.movieList = movieListResult.movies
             } else {
                 DispatchQueue.main.async {
-                    self.collectionViewRefreshControl.endRefreshing()
                     showAlert(viewcontroller: self, title: "문제발생", message: "데이터를 가져올 수 없습니다.")
                 }
             }
         }
+    }
+    
+    //MARKL:- Refresh
+    @objc func refreshMovieData() {
+        request(usingIndicator: false)
     }
     
     //MARK:- Setup CollectionView
