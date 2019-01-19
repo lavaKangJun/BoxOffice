@@ -37,16 +37,16 @@ class MovieListTableViewController: UITableViewController {
                     self.movieList = movieListResult.movies
                 } else {
                     DispatchQueue.main.async {
-                        showAlert(viewcontroller: self, title: "문제발생", message: "데이터를 가져올 수 없습니다.")
+                        self.showAlert(title: "문제발생", message: "데이터를 가져올 수 없습니다.")
                     }
                 }
                 DispatchQueue.main.async {
-                     self.activityIndicatorView.stopAnimating()
+                    self.activityIndicatorView.stopAnimating()
                 }
             } else {
                 DispatchQueue.main.async {
-                     self.activityIndicatorView.stopAnimating()
-                    showAlert(viewcontroller: self, title: "문제발생", message: "데이터를 가져올 수 없습니다.")
+                    self.activityIndicatorView.stopAnimating()
+                    self.showAlert(title: "문제발생", message: "데이터를 가져올 수 없습니다.")
                 }
             }
         }
@@ -75,7 +75,7 @@ class MovieListTableViewController: UITableViewController {
                     self.movieList = movieListResult.movies
                 } else {
                     DispatchQueue.main.async {
-                        showAlert(viewcontroller: self, title: "문제발생", message: "데이터를 가져올 수 없습니다.")
+                        self.showAlert(title: "문제발생", message: "데이터를 가져올 수 없습니다.")
                     }
                 }
                 DispatchQueue.main.async {
@@ -84,7 +84,7 @@ class MovieListTableViewController: UITableViewController {
             } else {
                 DispatchQueue.main.async {
                      self.tableviewRefreshControl.endRefreshing()
-                     showAlert(viewcontroller: self, title: "문제발생", message: "데이터를 가져올 수 없습니다.")
+                     self.showAlert(title: "문제발생", message: "데이터를 가져올 수 없습니다.")
                 }
             }
         }
