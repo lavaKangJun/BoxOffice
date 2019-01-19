@@ -76,13 +76,13 @@ class MovieDetailTableViewController: UITableViewController, UITextViewDelegate 
                 } else {
                     DispatchQueue.main.async {
                         self.activityIndicatorView.stopAnimating()
-                        showErrorAlert(viewcontroller: self)
+                        self.showErrorAlert()
                     }
                 }
             } else {
                 DispatchQueue.main.async {
                     self.activityIndicatorView.stopAnimating()
-                    showErrorAlert(viewcontroller: self)
+                    self.showErrorAlert()
                 }
             }
         }
@@ -96,12 +96,12 @@ class MovieDetailTableViewController: UITableViewController, UITextViewDelegate 
                     self.movieReviewList = movieReviewList.comments
                 } else {
                     DispatchQueue.main.async {
-                        showErrorAlert(viewcontroller: self)
+                        self.showErrorAlert()
                     }
                 }
             } else{
                 DispatchQueue.main.async {
-                    showErrorAlert(viewcontroller: self)
+                    self.showErrorAlert()
                 }
             }
         }
@@ -252,7 +252,7 @@ class MovieDetailTableViewController: UITableViewController, UITextViewDelegate 
                 } catch (let error) {
                     print(error.localizedDescription)
                     DispatchQueue.main.async {
-                        showAlert(viewcontroller: self, title: "문제발생", message: "이미지를 가져올 수 없습니다.")
+                        self.showAlert(title: "문제발생", message: "이미지를 가져올 수 없습니다.")
                     }
                 }
             }
