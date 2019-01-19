@@ -63,21 +63,8 @@ class MainTabBarController: UITabBarController {
                 return
             }
             movieInfoRequest(urlString: self.movieListURL, value: MovieSorting.sortingReservation.rawValue) { (success, error, movieListResult: MovieListResult?) -> (Void) in
-               
-                if success {
-                    if let movieListResult = movieListResult {
-                        let movieList = movieListResult.movies
-                        tableView.movieList = movieList
-                        collectionViw.movieList = movieList
-                        tableView.orderNumber = MovieSorting.sortingReservation
-                        collectionViw.orderNumber = MovieSorting.sortingReservation
-                        DispatchQueue.main.async {
-                            self.navigationItem.title = "예매율순"
-                        }
-                    }
-                } else {
-                    showAlert(viewcontroller: self, title: "문제발생", message: "데이터를 읽어올 수 없습니다.")
-                }
+                
+                afterRequest(success: success, movieListResult: movieListResult, title: "예매율순")
             }
         }
         
@@ -86,43 +73,18 @@ class MainTabBarController: UITabBarController {
                 return
             }
             movieInfoRequest(urlString: self.movieListURL, value: MovieSorting.sortingCuration.rawValue)  { (success, error, movieListResult: MovieListResult?) -> (Void) in
-                if success {
-                    if let movieListResult = movieListResult {
-                        let movieList = movieListResult.movies
-                        tableView.movieList = movieList
-                        tableView.orderNumber = MovieSorting.sortingCuration
-                        collectionViw.orderNumber = MovieSorting.sortingCuration
-                        collectionViw.movieList = movieList
-                        DispatchQueue.main.async {
-                            self.navigationItem.title = "큐레이션"
-                        }
-                    }
-                } else {
-                    showAlert(viewcontroller: self, title: "문제발생", message: "데이터를 읽어올 수 없습니다.")
-                }
+                
+                afterRequest(success: success, movieListResult: movieListResult, title: "큐레이션")
             }
         }
         
-        let openDayAction: UIAlertAction = UIAlertAction(title: "개봉일", style: .default) {
-            [weak self] _ in
+        let openDayAction: UIAlertAction = UIAlertAction(title: "개봉일", style: .default) { [weak self] _ in
             guard let self = self else {
                 return
             }
             movieInfoRequest(urlString: self.movieListURL, value: MovieSorting.sortingOpenDay.rawValue) { (success, error, movieListResult: MovieListResult?) -> (Void) in
-                if success {
-                    if let movieListResult = movieListResult {
-                        let movieList = movieListResult.movies
-                        tableView.movieList = movieList
-                        collectionViw.movieList = movieList
-                        tableView.orderNumber = MovieSorting.sortingOpenDay
-                        collectionViw.orderNumber = MovieSorting.sortingOpenDay
-                        DispatchQueue.main.async {
-                            self.navigationItem.title = "개봉일"
-                        }
-                    }
-                } else {
-                    showAlert(viewcontroller: self, title: "문제발생", message: "데이터를 읽어올 수 없습니다.")
-                }
+                
+                afterRequest(success: success, movieListResult: movieListResult, title: "개봉일순")
             }
         }
         
@@ -134,6 +96,25 @@ class MainTabBarController: UITabBarController {
         alertController.addAction(cancelAction)
         
         self.present(alertController, animated: true, completion: nil)
+        
+        
+        func afterRequest(success: Bool, movieListResult: MovieListResult?, title: String) {
+            if success {
+                if let movieListResult = movieListResult {
+                    let movieList = movieListResult.movies
+                    tableView.movieList = movieList
+                    collectionViw.movieList = movieList
+                    tableView.orderNumber = MovieSorting.sortingReservation
+                    collectionViw.orderNumber = MovieSorting.sortingReservation
+                    DispatchQueue.main.async {
+                        self.navigationItem.title = title
+                    }
+                }
+            } else {
+                showAlert(viewcontroller: self, title: "문제발생", message: "데이터를 읽어올 수 없습니다.")
+            }
+        }
+        
     }
     
 }
