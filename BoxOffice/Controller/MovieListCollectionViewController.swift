@@ -85,7 +85,7 @@ class MovieListCollectionViewController: UICollectionViewController, UICollectio
                 self.movieList = movieListResult.movies
             } else {
                 DispatchQueue.main.async {
-                    showAlert(viewcontroller: self, title: "문제발생", message: "데이터를 가져올 수 없습니다.")
+                    self.showAlert(title: "문제발생", message: "데이터를 가져올 수 없습니다.")
                 }
             }
         }

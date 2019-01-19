@@ -76,7 +76,7 @@ class MainTabBarController: UITabBarController {
                         }
                     }
                 } else {
-                    showAlert(viewcontroller: self, title: "문제발생", message: "데이터를 읽어올 수 없습니다.")
+                    self.showAlert(title: "문제발생", message: "데이터를 읽어올 수 없습니다.")
                 }
             }
         }
@@ -98,7 +98,7 @@ class MainTabBarController: UITabBarController {
                         }
                     }
                 } else {
-                    showAlert(viewcontroller: self, title: "문제발생", message: "데이터를 읽어올 수 없습니다.")
+                    self.showAlert(title: "문제발생", message: "데이터를 읽어올 수 없습니다.")
                 }
             }
         }
@@ -121,7 +121,7 @@ class MainTabBarController: UITabBarController {
                         }
                     }
                 } else {
-                    showAlert(viewcontroller: self, title: "문제발생", message: "데이터를 읽어올 수 없습니다.")
+                    self.showAlert(title: "문제발생", message: "데이터를 읽어올 수 없습니다.")
                 }
             }
         }
