@@ -11,7 +11,6 @@ import UIKit
 class MovieListTableViewController: UITableViewController {
     
     private let tableViewCellId = "MovieListTableCell"
-    private let movieListURL = "http://connect-boxoffice.run.goorm.io/movies?order_type="
     private let activityIndicatorView = UIActivityIndicatorView(style: .whiteLarge)
     private var tableviewRefreshControl = UIRefreshControl()
     var movieList: [MovieList] = []  {
@@ -28,28 +27,7 @@ class MovieListTableViewController: UITableViewController {
         super.viewDidLoad()
 
         setupTableView()
-        
-        movieInfoRequest(urlString: movieListURL, value: orderNumber.rawValue) { [weak self](success, error, movieListResult: MovieListResult?) in
-            guard let self = self else { return }
-            
-            if success {
-                if let movieListResult = movieListResult {
-                    self.movieList = movieListResult.movies
-                } else {
-                    DispatchQueue.main.async {
-                        showAlert(viewcontroller: self, title: "문제발생", message: "데이터를 가져올 수 없습니다.")
-                    }
-                }
-                DispatchQueue.main.async {
-                     self.activityIndicatorView.stopAnimating()
-                }
-            } else {
-                DispatchQueue.main.async {
-                     self.activityIndicatorView.stopAnimating()
-                    showAlert(viewcontroller: self, title: "문제발생", message: "데이터를 가져올 수 없습니다.")
-                }
-            }
-        }
+        request()
         
         if #available(iOS 10.0, *) {
             tableView.refreshControl = self.tableviewRefreshControl
@@ -66,28 +44,25 @@ class MovieListTableViewController: UITableViewController {
         activityIndicatorView.startAnimating()
     }
     
-    //MARK:- Refresh
-    @objc func refreshMovieData() {
-        movieInfoRequest(urlString: movieListURL, value: orderNumber.rawValue) { [weak self](success, error, movieListResult: MovieListResult?) in
+    private func request(usingIndicator: Bool = true) {
+        MovieAPI.shared.movieInfoRequest(requestType: RequestType.movieList, value: orderNumber.rawValue) { [weak self](success, error, movieListResult: MovieListResult?) in
             guard let self = self else { return }
-            if success {
-                if let movieListResult = movieListResult {
-                    self.movieList = movieListResult.movies
-                } else {
-                    DispatchQueue.main.async {
-                        showAlert(viewcontroller: self, title: "문제발생", message: "데이터를 가져올 수 없습니다.")
-                    }
-                }
-                DispatchQueue.main.async {
-                    self.tableviewRefreshControl.endRefreshing()
-                }
+            DispatchQueue.main.async {
+                (usingIndicator) ? self.activityIndicatorView.stopAnimating() : self.tableviewRefreshControl.endRefreshing()
+            }
+            if success, let movieListResult = movieListResult {
+                self.movieList = movieListResult.movies
             } else {
                 DispatchQueue.main.async {
-                     self.tableviewRefreshControl.endRefreshing()
-                     showAlert(viewcontroller: self, title: "문제발생", message: "데이터를 가져올 수 없습니다.")
+                    self.showAlert(title: "문제발생", message: "데이터를 가져올 수 없습니다.")
                 }
             }
         }
+    }
+    
+    //MARK:- Refresh
+    @objc func refreshMovieData() {
+        request(usingIndicator: false)
     }
    
     //MARK:- Setup func

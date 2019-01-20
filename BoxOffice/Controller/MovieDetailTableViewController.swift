@@ -12,8 +12,6 @@ class MovieDetailTableViewController: UITableViewController, UITextViewDelegate 
 
     private let cache: NSCache = NSCache<NSString, UIImage>()
     private let activityIndicatorView = UIActivityIndicatorView(style: .whiteLarge)
-    private let movieDetailURL = "http://connect-boxoffice.run.goorm.io/movie?id="
-    private let movieCommentURL = "http://connect-boxoffice.run.goorm.io/comments?movie_id="
     var movieId: String?
     var movietitle: String?
     var movieDetail: MovieDetailResult? {
@@ -66,7 +64,7 @@ class MovieDetailTableViewController: UITableViewController, UITextViewDelegate 
             return
         }
         
-        movieInfoRequest(urlString: movieDetailURL, value: movieId) { [weak self](success, error, movieDetail: MovieDetailResult?) in
+        MovieAPI.shared.movieInfoRequest(requestType: .movieDetail, value: movieId) { [weak self](success, error, movieDetail: MovieDetailResult?) in
             guard let self = self else {
                 return
             }
@@ -76,18 +74,18 @@ class MovieDetailTableViewController: UITableViewController, UITextViewDelegate 
                 } else {
                     DispatchQueue.main.async {
                         self.activityIndicatorView.stopAnimating()
-                        showErrorAlert(viewcontroller: self)
+                        self.showErrorAlert()
                     }
                 }
             } else {
                 DispatchQueue.main.async {
                     self.activityIndicatorView.stopAnimating()
-                    showErrorAlert(viewcontroller: self)
+                    self.showErrorAlert()
                 }
             }
         }
         
-        movieInfoRequest(urlString: movieCommentURL, value: movieId) { [weak self] (success, error, movieReviewList: MovieReviewList?) in
+        MovieAPI.shared.movieInfoRequest(requestType: .movieComment, value: movieId) { [weak self] (success, error, movieReviewList: MovieReviewList?) in
             guard let self = self else {
                 return
             }
@@ -96,12 +94,12 @@ class MovieDetailTableViewController: UITableViewController, UITextViewDelegate 
                     self.movieReviewList = movieReviewList.comments
                 } else {
                     DispatchQueue.main.async {
-                        showErrorAlert(viewcontroller: self)
+                        self.showErrorAlert()
                     }
                 }
             } else{
                 DispatchQueue.main.async {
-                    showErrorAlert(viewcontroller: self)
+                    self.showErrorAlert()
                 }
             }
         }
@@ -252,7 +250,7 @@ class MovieDetailTableViewController: UITableViewController, UITextViewDelegate 
                 } catch (let error) {
                     print(error.localizedDescription)
                     DispatchQueue.main.async {
-                        showAlert(viewcontroller: self, title: "문제발생", message: "이미지를 가져올 수 없습니다.")
+                        self.showAlert(title: "문제발생", message: "이미지를 가져올 수 없습니다.")
                     }
                 }
             }

@@ -9,27 +9,22 @@
 import Foundation
 import UIKit
 
-func showAlert(viewcontroller: UIViewController, title: String, message: String) {
-    let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
-    
-    let okAction = UIAlertAction(title: "Ok", style: .default)
-    
-    let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
-    
-    alertController.addAction(okAction)
-    alertController.addAction(cancelAction)
-    
-    viewcontroller.present(alertController, animated: true, completion: nil)
-}
-
-func showErrorAlert(viewcontroller: UIViewController) {
-    let alertController = UIAlertController(title: "문제발생", message: "데이터를 가져올 수 없습니다.", preferredStyle: .alert)
-    
-    let okAction = UIAlertAction(title: "Ok", style: .default) { (action: UIAlertAction) in
-        viewcontroller.navigationController?.popViewController(animated: true)
+extension UIViewController {
+    func showAlert(title: String, message: String) {
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "Ok", style: .default)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+        alertController.addAction(okAction)
+        alertController.addAction(cancelAction)
+        present(alertController, animated: true, completion: nil)
     }
-    
-    alertController.addAction(okAction)
-    
-    viewcontroller.present(alertController, animated: true, completion: nil)
+    func showErrorAlert() {
+        let alertController = UIAlertController(title: "문제발생", message: "데이터를 가져올 수 없습니다.", preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "Ok", style: .default) { [weak self] (_) in
+            guard let self = self else { return }
+            self.navigationController?.popViewController(animated: true)
+        }
+        alertController.addAction(okAction)
+        present(alertController, animated: true, completion: nil)
+    }
 }
