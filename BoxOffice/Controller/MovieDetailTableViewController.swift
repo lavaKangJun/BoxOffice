@@ -12,8 +12,6 @@ class MovieDetailTableViewController: UITableViewController, UITextViewDelegate 
 
     private let cache: NSCache = NSCache<NSString, UIImage>()
     private let activityIndicatorView = UIActivityIndicatorView(style: .whiteLarge)
-    private let movieDetailURL = "http://connect-boxoffice.run.goorm.io/movie?id="
-    private let movieCommentURL = "http://connect-boxoffice.run.goorm.io/comments?movie_id="
     var movieId: String?
     var movietitle: String?
     var movieDetail: MovieDetailResult? {
@@ -66,7 +64,7 @@ class MovieDetailTableViewController: UITableViewController, UITextViewDelegate 
             return
         }
         
-        movieInfoRequest(urlString: movieDetailURL, value: movieId) { [weak self](success, error, movieDetail: MovieDetailResult?) in
+        MovieAPI.shared.movieInfoRequest(requestType: .movieDetail, value: movieId) { [weak self](success, error, movieDetail: MovieDetailResult?) in
             guard let self = self else {
                 return
             }
@@ -87,7 +85,7 @@ class MovieDetailTableViewController: UITableViewController, UITextViewDelegate 
             }
         }
         
-        movieInfoRequest(urlString: movieCommentURL, value: movieId) { [weak self] (success, error, movieReviewList: MovieReviewList?) in
+        MovieAPI.shared.movieInfoRequest(requestType: .movieComment, value: movieId) { [weak self] (success, error, movieReviewList: MovieReviewList?) in
             guard let self = self else {
                 return
             }

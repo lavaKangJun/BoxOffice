@@ -12,7 +12,6 @@ class MovieListCollectionViewController: UICollectionViewController, UICollectio
 
     //MARK:- Property
     private let collectionViewCellId = "MovieListCollectionCell"
-    private let movieListURL = "http://connect-boxoffice.run.goorm.io/movies?order_type="
     private let activityIndicatorView = UIActivityIndicatorView(style: .whiteLarge)
     private var collectionViewRefreshControl = UIRefreshControl()
     
@@ -76,7 +75,7 @@ class MovieListCollectionViewController: UICollectionViewController, UICollectio
     }
     
     private func request(usingIndicator: Bool = true) {
-        movieInfoRequest(urlString: movieListURL, value: orderNumber.rawValue) { [weak self](success, error, movieListResult: MovieListResult?) in
+        MovieAPI.shared.movieInfoRequest(requestType: RequestType.movieList, value: orderNumber.rawValue) { [weak self](success, error, movieListResult: MovieListResult?) in
             guard let self = self else { return }
             DispatchQueue.main.async {
                 (usingIndicator) ? self.activityIndicatorView.stopAnimating() : self.collectionViewRefreshControl.endRefreshing()

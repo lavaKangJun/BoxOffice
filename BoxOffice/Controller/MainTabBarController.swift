@@ -10,7 +10,6 @@ import UIKit
 
 class MainTabBarController: UITabBarController {
 
-    private let movieListURL = "http://connect-boxoffice.run.goorm.io/movies?order_type="
     var tableViewController: MovieListTableViewController?
     var collectionViewController: MovieListCollectionViewController?
 
@@ -62,22 +61,8 @@ class MainTabBarController: UITabBarController {
             guard let self = self else {
                 return
             }
-            movieInfoRequest(urlString: self.movieListURL, value: MovieSorting.sortingReservation.rawValue) { (success, error, movieListResult: MovieListResult?) -> (Void) in
-               
-                if success {
-                    if let movieListResult = movieListResult {
-                        let movieList = movieListResult.movies
-                        tableView.movieList = movieList
-                        collectionViw.movieList = movieList
-                        tableView.orderNumber = MovieSorting.sortingReservation
-                        collectionViw.orderNumber = MovieSorting.sortingReservation
-                        DispatchQueue.main.async {
-                            self.navigationItem.title = "예매율순"
-                        }
-                    }
-                } else {
-                    self.showAlert(title: "문제발생", message: "데이터를 읽어올 수 없습니다.")
-                }
+            MovieAPI.shared.movieInfoRequest(requestType: RequestType.movieList, value: MovieSorting.sortingReservation.rawValue) { (success, error, movieListResult: MovieListResult?) -> (Void) in
+                afterMovieRequest(success: success, title: "예매율", sortingOption: .sortingReservation, movieListResult: movieListResult)
             }
         }
         
@@ -85,21 +70,8 @@ class MainTabBarController: UITabBarController {
              guard let self = self else {
                 return
             }
-            movieInfoRequest(urlString: self.movieListURL, value: MovieSorting.sortingCuration.rawValue)  { (success, error, movieListResult: MovieListResult?) -> (Void) in
-                if success {
-                    if let movieListResult = movieListResult {
-                        let movieList = movieListResult.movies
-                        tableView.movieList = movieList
-                        tableView.orderNumber = MovieSorting.sortingCuration
-                        collectionViw.orderNumber = MovieSorting.sortingCuration
-                        collectionViw.movieList = movieList
-                        DispatchQueue.main.async {
-                            self.navigationItem.title = "큐레이션"
-                        }
-                    }
-                } else {
-                    self.showAlert(title: "문제발생", message: "데이터를 읽어올 수 없습니다.")
-                }
+            MovieAPI.shared.movieInfoRequest(requestType: RequestType.movieList, value: MovieSorting.sortingCuration.rawValue)  { (success, error, movieListResult: MovieListResult?) -> (Void) in
+                afterMovieRequest(success: success, title: "큐레이션", sortingOption: .sortingCuration, movieListResult: movieListResult)
             }
         }
         
@@ -108,21 +80,8 @@ class MainTabBarController: UITabBarController {
             guard let self = self else {
                 return
             }
-            movieInfoRequest(urlString: self.movieListURL, value: MovieSorting.sortingOpenDay.rawValue) { (success, error, movieListResult: MovieListResult?) -> (Void) in
-                if success {
-                    if let movieListResult = movieListResult {
-                        let movieList = movieListResult.movies
-                        tableView.movieList = movieList
-                        collectionViw.movieList = movieList
-                        tableView.orderNumber = MovieSorting.sortingOpenDay
-                        collectionViw.orderNumber = MovieSorting.sortingOpenDay
-                        DispatchQueue.main.async {
-                            self.navigationItem.title = "개봉일"
-                        }
-                    }
-                } else {
-                    self.showAlert(title: "문제발생", message: "데이터를 읽어올 수 없습니다.")
-                }
+            MovieAPI.shared.movieInfoRequest(requestType: RequestType.movieList, value: MovieSorting.sortingOpenDay.rawValue) { (success, error, movieListResult: MovieListResult?) -> (Void) in
+                afterMovieRequest(success: success, title: "개봉일", sortingOption: MovieSorting.sortingOpenDay, movieListResult: movieListResult)
             }
         }
         
@@ -134,6 +93,23 @@ class MainTabBarController: UITabBarController {
         alertController.addAction(cancelAction)
         
         self.present(alertController, animated: true, completion: nil)
+        
+        func afterMovieRequest(success: Bool, title: String, sortingOption: MovieSorting, movieListResult: MovieListResult?) {
+            if success {
+                if let movieListResult = movieListResult {
+                    let movieList = movieListResult.movies
+                    tableView.movieList = movieList
+                    collectionViw.movieList = movieList
+                    tableView.orderNumber = sortingOption
+                    collectionViw.orderNumber = sortingOption
+                    DispatchQueue.main.async {
+                        self.navigationItem.title = title
+                    }
+                }
+            } else {
+                self.showAlert(title: "문제발생", message: "데이터를 읽어올 수 없습니다.")
+            }
+        }
     }
     
 }
