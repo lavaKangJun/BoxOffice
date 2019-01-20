@@ -40,10 +40,12 @@ class MovieListTableCell: UITableViewCell {
                 
                 // caching image
                 if let image = self.cache.object(forKey: imageURL.absoluteString as NSString) {
+                    print("cache")
                     DispatchQueue.main.async {
                         self.moviePosterImageView.image = image
                     }
                 }else {
+                    print("not cache")
                     do {
                         let imageData: Data = try Data(contentsOf: imageURL)
                         self.cache.setObject(UIImage(data: imageData) ?? #imageLiteral(resourceName: "img_placeholder"), forKey: imageURL.absoluteString as NSString)
